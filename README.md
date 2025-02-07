@@ -46,31 +46,14 @@ text = transcriber.transcribe("your_audio_file.wav")
 print(text)
 ```
 
-## 📝 Example Code
-
-```python
-class AudioTranscriber:
-    def __init__(self):
-        self.transcriber = pipeline("automatic-speech-recognition", 
-                                  model="openai/whisper-tiny")
-    
-    def transcribe(self, audio_path):
-        # Load audio with standard sample rate
-        y, sr = librosa.load(audio_path, sr=16000)
-        
-        # Get transcription
-        result = self.transcriber({"array": y, "sampling_rate": sr})
-        
-        return result["text"]
-```
-
 ## ⚙️ Configuration
 
 The current implementation uses the `whisper-tiny` model. For better accuracy, you can modify the model in the initialization:
 
 ```python
-self.transcriber = pipeline("automatic-speech-recognition", 
-                          model="openai/whisper-base")  # or other variants
+self.transcriber = pipeline("automatic-speech-recognition",
+                            model="openai/whisper-base",
+                            return_timestamps=True)  # or other variants
 ```
 
 ## 🤝 Contributing
